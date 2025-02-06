@@ -2,6 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  * {
+    @apply box-border;
+  } 
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box; /* 1 */
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -14,9 +32,9 @@
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
+body, #__next {
+  color: #171717;
+  background: #ededed;
 }
 
 body, input, textarea, button {

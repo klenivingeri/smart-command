@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="pt">
       <body
-        className={`${roboto.variable} antialiased`}
+        className={`${roboto.variable} antialiased w-screen h-screen box-border`}
       >
         {children}
       </body>

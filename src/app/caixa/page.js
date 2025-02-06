@@ -1,3 +1,11 @@
+"use client";
+
+import { PageCaixa } from "@/components/Pages/Caixa";
+
 export default function Caixa() {
-  return  <div> Caixa</div>
+  return (
+    <div className="h-full">
+      <PageCaixa path="caixa" />
+    </div>
+  );
 }
