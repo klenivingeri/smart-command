@@ -17,17 +17,17 @@ const Li = ({
   pl = "pl-6",
   name,
   path,
-  setPathName,
+  handleSetPathName,
 }) => {
   return (
     <Link
       href={link}
       onClick={() => {
-        setPathName(name);
+        handleSetPathName(name, link);
       }}
-      className={`flex w-full gap-4 ${pl} p-3 items-center text-1xl ${
-        path == name ? "bg-gray-300" : ""
-      } hover:bg-gray-300`}
+      className={`flex w-full gap-4 ${pl} p-3 items-center text-1xl rounded-md ${
+        path == name ? "bg-purple-200 font-medium text-purple-800" : ""
+      } hover:bg-purple-200 hover:text-purple-800`}
     >
       {children}
     </Link>
@@ -43,21 +43,29 @@ const menu = {
 export const SideBar = ({ path }) => {
   const [pathName, setPathName] = useState(path || "");
 
+  const handleSetPathName = (name, link) => {
+    if(name === pathName && !link){
+      setPathName('')
+    }else {
+      setPathName(name)
+    }
+  }
+
   return (
-    <nav className="w-[250px] min-w-[250px]">
-      <div id="logo" className="flex justify-center my-4 text-2xl">
+    <nav className="w-[250px] min-w-[250px] shadow-md">
+      <div id="logo" className="flex justify-center my-4 text-2xl text-purple-700">
         <b>Smart Command</b>
       </div>
       <div id="menu">
         <ul className="list-none p-2 w-full">
-          <Li name="inicio" path={pathName} setPathName={setPathName} link="/">
+          <Li name="inicio" path={pathName} handleSetPathName={handleSetPathName} link="/">
             <IconHome size="w-6 h-6" />
             Inicio
           </Li>
           <Li
             name="caixa"
             path={pathName}
-            setPathName={setPathName}
+            handleSetPathName={handleSetPathName}
             link="/caixa"
           >
             <IconMoney size="w-6 h-6" />
@@ -66,7 +74,7 @@ export const SideBar = ({ path }) => {
           <Li
             name="produto"
             path={pathName}
-            setPathName={setPathName}
+            handleSetPathName={handleSetPathName}
           >
             <div className="flex w-full justify-between">
               <div className="flex gap-4">
@@ -86,7 +94,7 @@ export const SideBar = ({ path }) => {
             <Li
               name="cadastrar-produto"
               path={pathName}
-              setPathName={setPathName}
+              handleSetPathName={handleSetPathName}
               pl="pl-12"
               link='/produto/cadastrar'
             >
@@ -96,7 +104,7 @@ export const SideBar = ({ path }) => {
             <Li
               name="consultar-produtos"
               path={pathName}
-              setPathName={setPathName}
+              handleSetPathName={handleSetPathName}
               pl="pl-12"
               link='/produto/consultar'
             >
@@ -106,7 +114,7 @@ export const SideBar = ({ path }) => {
             <Li
               name="relatorio-produtos"
               path={pathName}
-              setPathName={setPathName}
+              handleSetPathName={handleSetPathName}
               pl="pl-12"
               link='/produto/relatorio'
             >
@@ -117,7 +125,7 @@ export const SideBar = ({ path }) => {
           <Li
             name="comanda"
             path={pathName}
-            setPathName={setPathName}
+            handleSetPathName={handleSetPathName}
           >
             <div className="flex w-full justify-between">
               <div className="flex gap-4">
@@ -137,7 +145,7 @@ export const SideBar = ({ path }) => {
             <Li
               name="consultar-comandas"
               path={pathName}
-              setPathName={setPathName}
+              handleSetPathName={handleSetPathName}
               pl="pl-12"
               link='/comanda/consultar'
             >
@@ -147,7 +155,7 @@ export const SideBar = ({ path }) => {
             <Li
               name="relatorio-comandas"
               path={pathName}
-              setPathName={setPathName}
+              handleSetPathName={handleSetPathName}
               pl="pl-12"
               link='/comanda/relatorio'
             >
@@ -158,7 +166,7 @@ export const SideBar = ({ path }) => {
           <Li
             name="funcionario"
             path={pathName}
-            setPathName={setPathName}
+            handleSetPathName={handleSetPathName}
           >
             <div className="flex w-full justify-between">
               <div className="flex gap-4">
@@ -178,7 +186,7 @@ export const SideBar = ({ path }) => {
             <Li
               name="cadastrar-funcionario"
               path={pathName}
-              setPathName={setPathName}
+              handleSetPathName={handleSetPathName}
               pl="pl-12"
               link='/funcionario/cadastrar'
             >
@@ -188,7 +196,7 @@ export const SideBar = ({ path }) => {
             <Li
               name="consultar-funcionarios"
               path={pathName}
-              setPathName={setPathName}
+              handleSetPathName={handleSetPathName}
               pl="pl-12"
               link='/funcionario/consultar'
             >
@@ -198,7 +206,7 @@ export const SideBar = ({ path }) => {
             <Li
               name="relatorio-funcionarios"
               path={pathName}
-              setPathName={setPathName}
+              handleSetPathName={handleSetPathName}
               pl="pl-12"
               link='/funcionario/relatorio'
             >
