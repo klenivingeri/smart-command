@@ -1,10 +1,10 @@
 import { Container } from "@/components/Atoms/Container";
 import { Content } from "@/components/Atoms/Content";
 
-export const ContainerContent = ({children}) => {
+export const ContainerContent = ({children, title, Icon}) => {
   return (
     <Container>
-      <Content>{children}</Content>
+      <Content title={title} Icon={Icon}>{children}</Content>
     </Container>
   );
 };

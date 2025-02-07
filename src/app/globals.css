@@ -38,5 +38,5 @@ body, #__next {
 }
 
 body, input, textarea, button {
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--font-poppins), var(--font-roboto), sans-serif;
 }
