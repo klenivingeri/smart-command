@@ -1,3 +1,3 @@
-export const Content = () => {
-  return <main className="w-full h-full bg-black min-w-[400px] max-w-[1200px]">Content</main>;
+export const Content = ({children}) => {
+  return <main className="w-full h-full min-w-[400px] max-w-[1200px]">{children}</main>;
 };
