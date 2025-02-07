@@ -13,7 +13,6 @@ import { useState } from "react";
 
 const Li = ({
   children,
-  handleDrop = () => {},
   link = "",
   pl = "pl-6",
   name,
@@ -25,7 +24,6 @@ const Li = ({
       href={link}
       onClick={() => {
         setPathName(name);
-        handleDrop();
       }}
       className={`flex w-full gap-4 ${pl} p-3 items-center text-1xl ${
         path == name ? "bg-gray-300" : ""
@@ -36,10 +34,13 @@ const Li = ({
   );
 };
 
+const menu = {
+  product:['produto', 'cadastrar-produto', 'consultar-produtos', 'relatorio-produtos'],
+  command:['comanda', 'consultar-comandas', 'relatorio-comandas'],
+  employees:['funcionario', 'cadastrar-funcionario', 'consultar-funcionarios', 'relatorio-funcionarios']
+}
+
 export const SideBar = ({ path }) => {
-  const [isDropProduct, setIsDropProduct] = useState(false);
-  const [isDropCommand, setIsDropCommand] = useState(false);
-  const [isDropEmployees, setIsDropEmployees] = useState(false);
   const [pathName, setPathName] = useState(path || "");
 
   return (
@@ -63,10 +64,9 @@ export const SideBar = ({ path }) => {
             Caixa
           </Li>
           <Li
-            name="produtos"
+            name="produto"
             path={pathName}
             setPathName={setPathName}
-            handleDrop={() => setIsDropProduct(!isDropProduct)}
           >
             <div className="flex w-full justify-between">
               <div className="flex gap-4">
@@ -74,7 +74,7 @@ export const SideBar = ({ path }) => {
                 Produtos
               </div>
               <div className="mt-[4px] mr-2">
-                {isDropProduct ? (
+                {menu.product.includes(pathName) ? (
                   <IconChevronDown size="w-4 h-4" />
                 ) : (
                   <IconChevronRight size="w-4 h-4" />
@@ -82,12 +82,13 @@ export const SideBar = ({ path }) => {
               </div>
             </div>
           </Li>
-          <div className={`${isDropProduct ? "" : "hidden"}`}>
+          <div className={`${menu.product.includes(pathName) ? "" : "hidden"}`}>
             <Li
               name="cadastrar-produto"
               path={pathName}
               setPathName={setPathName}
               pl="pl-12"
+              link='/produto/cadastrar'
             >
               <IconCreate size="w-6 h-6" />
               Cadastrar
@@ -97,6 +98,7 @@ export const SideBar = ({ path }) => {
               path={pathName}
               setPathName={setPathName}
               pl="pl-12"
+              link='/produto/consultar'
             >
               <IconSearch size="w-6 h-6" />
               Consultar
@@ -106,6 +108,7 @@ export const SideBar = ({ path }) => {
               path={pathName}
               setPathName={setPathName}
               pl="pl-12"
+              link='/produto/relatorio'
             >
               <IconChart size="w-6 h-6" />
               Relatório
@@ -115,7 +118,6 @@ export const SideBar = ({ path }) => {
             name="comanda"
             path={pathName}
             setPathName={setPathName}
-            handleDrop={() => setIsDropCommand(!isDropCommand)}
           >
             <div className="flex w-full justify-between">
               <div className="flex gap-4">
@@ -123,7 +125,7 @@ export const SideBar = ({ path }) => {
                 Comandas
               </div>
               <div className="mt-[4px] mr-2">
-                {isDropCommand ? (
+                {menu.command.includes(pathName) ? (
                   <IconChevronDown size="w-4 h-4" />
                 ) : (
                   <IconChevronRight size="w-4 h-4" />
@@ -131,12 +133,13 @@ export const SideBar = ({ path }) => {
               </div>
             </div>
           </Li>
-          <div className={`${isDropCommand ? "" : "hidden"}`}>
+          <div className={`${menu.command.includes(pathName) ? "" : "hidden"}`}>
             <Li
               name="consultar-comandas"
               path={pathName}
               setPathName={setPathName}
               pl="pl-12"
+              link='/comanda/consultar'
             >
               <IconSearch size="w-6 h-6" />
               Consultar
@@ -146,6 +149,7 @@ export const SideBar = ({ path }) => {
               path={pathName}
               setPathName={setPathName}
               pl="pl-12"
+              link='/comanda/relatorio'
             >
               <IconChart size="w-6 h-6" />
               Relatório
@@ -155,7 +159,6 @@ export const SideBar = ({ path }) => {
             name="funcionario"
             path={pathName}
             setPathName={setPathName}
-            handleDrop={() => setIsDropEmployees(!isDropEmployees)}
           >
             <div className="flex w-full justify-between">
               <div className="flex gap-4">
@@ -163,7 +166,7 @@ export const SideBar = ({ path }) => {
                 Funcionários
               </div>
               <div className="mt-[4px] mr-2">
-                {isDropEmployees ? (
+                {menu.employees.includes(pathName) ? (
                   <IconChevronDown size="w-4 h-4" />
                 ) : (
                   <IconChevronRight size="w-4 h-4" />
@@ -171,30 +174,33 @@ export const SideBar = ({ path }) => {
               </div>
             </div>
           </Li>
-          <div className={`${isDropEmployees ? "" : "hidden"}`}>
+          <div className={`${menu.employees.includes(pathName) ? "" : "hidden"}`}>
             <Li
               name="cadastrar-funcionario"
               path={pathName}
               setPathName={setPathName}
               pl="pl-12"
+              link='/funcionario/cadastrar'
             >
               <IconUserAdd size="w-6 h-6" />
               Cadastrar
             </Li>
             <Li
-              name="consultar-funcionario"
+              name="consultar-funcionarios"
               path={pathName}
               setPathName={setPathName}
               pl="pl-12"
+              link='/funcionario/consultar'
             >
               <IconUserSearch size="w-6 h-6" />
               Consultar
             </Li>
             <Li
-              name="relatorio-funcionario"
+              name="relatorio-funcionarios"
               path={pathName}
               setPathName={setPathName}
               pl="pl-12"
+              link='/funcionario/relatorio'
             >
               <IconChart size="w-6 h-6" />
               Relatório
