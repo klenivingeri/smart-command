@@ -1,20 +1,45 @@
 "use client";
 import { IconChart } from "@/icons/Chart";
 import { IconChevronDown, IconChevronRight } from "@/icons/Chevron";
+import { IconChevronDoubleLeft, IconChevronDoubleRight } from "@/icons/ChevronDouble";
 import { IconCommand } from "@/icons/Command";
 import { IconCreate } from "@/icons/Create";
 import { IconHome } from "@/icons/Home";
 import { IconMoney } from "@/icons/Money";
+import { IconPercent } from "@/icons/Percent";
 import { IconSearch } from "@/icons/Search";
 import { IconShoppingCart } from "@/icons/ShoppingCart";
 import { IconUsers, IconUserAdd, IconUserSearch } from "@/icons/User";
 import Link from "next/link";
 import { useState } from "react";
 
+const menu = {
+  product: [
+    "produto",
+    "cadastrar-produto",
+    "consultar-produtos",
+    "relatorio-produtos",
+  ],
+  command: ["comanda", "consultar-comandas", "relatorio-comandas"],
+  employees: [
+    "funcionario",
+    "cadastrar-funcionario",
+    "consultar-funcionarios",
+    "relatorio-funcionarios",
+  ],
+  promotion: [
+    "promocao",
+    "cadastrar-promocao",
+    "consultar-promocoes",
+    "relatorio-promocoes",
+  ],
+};
+
+
 const Li = ({
   children,
   link = "",
-  pl = "pl-6",
+  pl = "pl-3",
   name,
   path,
   handleSetPathName,
@@ -34,31 +59,49 @@ const Li = ({
   );
 };
 
-const menu = {
-  product:['produto', 'cadastrar-produto', 'consultar-produtos', 'relatorio-produtos'],
-  command:['comanda', 'consultar-comandas', 'relatorio-comandas'],
-  employees:['funcionario', 'cadastrar-funcionario', 'consultar-funcionarios', 'relatorio-funcionarios']
-}
+
 
 export const SideBar = ({ path }) => {
   const [pathName, setPathName] = useState(path || "");
+  const [closeMenu, setCloseMenu] = useState(false);
 
   const handleSetPathName = (name, link) => {
-    if(name === pathName && !link){
-      setPathName('')
-    }else {
-      setPathName(name)
+    if (name === pathName && !link) {
+      setPathName("");
+    } else {
+      setPathName(name);
     }
-  }
-
-  return (
+  };
+  console.log({closeMenu})
+  return !closeMenu ? (
     <nav className="w-[250px] min-w-[250px] shadow-md">
-      <div id="logo" className="flex justify-center my-4 text-2xl text-purple-700">
-        <b>Smart Command</b>
+      <div
+        id="logo"
+        className="flex mt-4 text-2xl justify-between items-center mx-4 text-purple-700"
+      >
+        <div className="flex flex-col justify-center">
+          <span className="flex justify-center ml-[-19px]">
+            <b>Smart</b>
+          </span>
+          <div className="mt-[-15px]">
+            <b>Command</b>
+          </div>
+        </div>
+        <div
+          onClick={() => setCloseMenu(!closeMenu)}
+          className="bg-gray-100 hover:bg-purple-200 pl-2 pr-3 py-2 rounded-md"
+        >
+          <IconChevronDoubleLeft size="w-6 h-6" />
+        </div>
       </div>
       <div id="menu">
         <ul className="list-none p-2 w-full">
-          <Li name="inicio" path={pathName} handleSetPathName={handleSetPathName} link="/">
+          <Li
+            name="inicio"
+            path={pathName}
+            handleSetPathName={handleSetPathName}
+            link="/"
+          >
             <IconHome size="w-6 h-6" />
             Inicio
           </Li>
@@ -96,7 +139,7 @@ export const SideBar = ({ path }) => {
               path={pathName}
               handleSetPathName={handleSetPathName}
               pl="pl-12"
-              link='/produto/cadastrar'
+              link="/produto/cadastrar"
             >
               <IconCreate size="w-6 h-6" />
               Cadastrar
@@ -106,7 +149,7 @@ export const SideBar = ({ path }) => {
               path={pathName}
               handleSetPathName={handleSetPathName}
               pl="pl-12"
-              link='/produto/consultar'
+              link="/produto/consultar"
             >
               <IconSearch size="w-6 h-6" />
               Consultar
@@ -116,7 +159,7 @@ export const SideBar = ({ path }) => {
               path={pathName}
               handleSetPathName={handleSetPathName}
               pl="pl-12"
-              link='/produto/relatorio'
+              link="/produto/relatorio"
             >
               <IconChart size="w-6 h-6" />
               Relatório
@@ -147,7 +190,7 @@ export const SideBar = ({ path }) => {
               path={pathName}
               handleSetPathName={handleSetPathName}
               pl="pl-12"
-              link='/comanda/consultar'
+              link="/comanda/consultar"
             >
               <IconSearch size="w-6 h-6" />
               Consultar
@@ -157,7 +200,60 @@ export const SideBar = ({ path }) => {
               path={pathName}
               handleSetPathName={handleSetPathName}
               pl="pl-12"
-              link='/comanda/relatorio'
+              link="/comanda/relatorio"
+            >
+              <IconChart size="w-6 h-6" />
+              Relatório
+            </Li>
+          </div>
+          <Li
+            name="promocao"
+            path={pathName}
+            handleSetPathName={handleSetPathName}
+          >
+            <div className="flex w-full justify-between">
+              <div className="flex gap-4">
+                <IconPercent size="w-6 h-6" />
+                Promoções
+              </div>
+              <div className="mt-[4px] mr-2">
+                {menu.product.includes(pathName) ? (
+                  <IconChevronDown size="w-4 h-4" />
+                ) : (
+                  <IconChevronRight size="w-4 h-4" />
+                )}
+              </div>
+            </div>
+          </Li>
+          <div
+            className={`${menu.promotion.includes(pathName) ? "" : "hidden"}`}
+          >
+            <Li
+              name="cadastrar-promocao"
+              path={pathName}
+              handleSetPathName={handleSetPathName}
+              pl="pl-12"
+              link="/promocao/cadastrar"
+            >
+              <IconCreate size="w-6 h-6" />
+              Cadastrar
+            </Li>
+            <Li
+              name="consultar-promocoes"
+              path={pathName}
+              handleSetPathName={handleSetPathName}
+              pl="pl-12"
+              link="/promocao/consultar"
+            >
+              <IconSearch size="w-6 h-6" />
+              Consultar
+            </Li>
+            <Li
+              name="relatorio-promocoes"
+              path={pathName}
+              handleSetPathName={handleSetPathName}
+              pl="pl-12"
+              link="/promocao/relatorio"
             >
               <IconChart size="w-6 h-6" />
               Relatório
@@ -182,13 +278,15 @@ export const SideBar = ({ path }) => {
               </div>
             </div>
           </Li>
-          <div className={`${menu.employees.includes(pathName) ? "" : "hidden"}`}>
+          <div
+            className={`${menu.employees.includes(pathName) ? "" : "hidden"}`}
+          >
             <Li
               name="cadastrar-funcionario"
               path={pathName}
               handleSetPathName={handleSetPathName}
               pl="pl-12"
-              link='/funcionario/cadastrar'
+              link="/funcionario/cadastrar"
             >
               <IconUserAdd size="w-6 h-6" />
               Cadastrar
@@ -198,7 +296,7 @@ export const SideBar = ({ path }) => {
               path={pathName}
               handleSetPathName={handleSetPathName}
               pl="pl-12"
-              link='/funcionario/consultar'
+              link="/funcionario/consultar"
             >
               <IconUserSearch size="w-6 h-6" />
               Consultar
@@ -208,11 +306,87 @@ export const SideBar = ({ path }) => {
               path={pathName}
               handleSetPathName={handleSetPathName}
               pl="pl-12"
-              link='/funcionario/relatorio'
+              link="/funcionario/relatorio"
             >
               <IconChart size="w-6 h-6" />
               Relatório
             </Li>
+          </div>
+        </ul>
+      </div>
+    </nav>
+  ) : (
+    <nav className="w-[64px] min-w-[64px] shadow-md">
+      <div
+        id="logo"
+        className="flex mt-4 text-2xl justify-center items-center ml-4 pt-[17px] text-purple-700"
+      >
+        <div className="flex flex-col justify-center">
+          <div className="flex justify-center ml-[-19px]"><b>SC</b></div>
+        </div>
+      </div>
+      <div id="menu">
+        <ul className="list-none p-2 w-full">
+        <div onClick={() => setCloseMenu(!closeMenu)} title="Inicio">
+          <Li
+            name="inicio"
+            path={pathName}
+            handleSetPathName={handleSetPathName}
+            link="/"
+          >
+            <IconHome size="w-6 h-6" />
+          </Li>
+
+          </div>
+          <div onClick={() => setCloseMenu(!closeMenu)} title="Caixa">
+          <Li
+            name="caixa"
+            path={pathName}
+            handleSetPathName={handleSetPathName}
+            link="/caixa"
+          >
+            <IconMoney size="w-6 h-6" />
+          </Li>
+          </div>
+          <div onClick={() => setCloseMenu(!closeMenu)} title="Produto">
+          <Li
+            name="produto"
+            path={pathName}
+            handleSetPathName={handleSetPathName}
+            
+          >
+            <IconShoppingCart size="w-6 h-6" />
+          </Li>
+          </div>
+          <div onClick={() => setCloseMenu(!closeMenu)} title="Comanda">
+          <Li
+            name="comanda"
+            path={pathName}
+            handleSetPathName={handleSetPathName}
+            onClick={() => setCloseMenu(!closeMenu)}
+          >
+            <IconCommand size="w-6 h-6" />
+          </Li>
+          </div>
+          <div onClick={() => setCloseMenu(!closeMenu)} title="Promoção">
+          <Li
+            name="promocao"
+            path={pathName}
+            handleSetPathName={handleSetPathName}
+            onClick={() => setCloseMenu(!closeMenu)}
+          >
+            <IconPercent size="w-6 h-6" />
+          </Li>
+          </div>
+          <div onClick={() => setCloseMenu(!closeMenu)} title="Funcionario">
+          <Li
+            name="funcionario"
+            path={pathName}
+            handleSetPathName={handleSetPathName}
+            onClick={() => setCloseMenu(!closeMenu)}
+          >
+            <IconUsers size="w-6 h-6" />
+          </Li>
           </div>
         </ul>
       </div>
