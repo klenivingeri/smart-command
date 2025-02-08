@@ -4,7 +4,7 @@ import { Content } from "@/components/Atoms/Content";
 export const ContainerContent = ({children, title, Icon}) => {
   return (
     <Container>
-      <Content title={title} Icon={Icon}>{children}</Content>
+      <Content>{children}</Content>
     </Container>
   );
 };
