@@ -1,58 +1,69 @@
 import { formatCurrency } from "@/utils/currency";
+import { useState } from "react";
 
-export const Input = ({ title }) => {
+export const Label = ({ title, children }) => {
   return (
-    <div className="rounded-md border-[1px] bg-gray-100 w-[300px] relative">
-      <div className="absolute top-0 left-2 mt-[-9px] text-gray-400 bg-white px-2 text-[12px]">
+    <div className="rounded-md border-[1px] bg-gray-100 w-full relative">
+      <div className="absolute top-0 left-2 mt-[-8px]  text-gray-400 border-[1px] bg-white rounded-md leading-none px-2 text-[12px]">
         {title}
       </div>
-      <input className="rounded-md h-[40px] pl-4 w-[298px]" />
+      {children}
     </div>
+  );
+};
+
+export const Input = ({ title ,value , setValue }) => {
+  const handleInput = (e) => {
+    const value = e.target.value
+    setValue(value)
+
+  }
+  return (
+    <Label title={title}>
+      <input onChange={handleInput} className="rounded-md h-[40px] pl-2 w-full" autoComplete="off" value={value} />
+    </Label>
   );
 };
 
 export const InputNumeral = ({ title, value, setValue }) => {
   return (
-    <div className="rounded-md border-[1px] bg-gray-100 w-[300px] relative">
-      <div className="absolute top-0 left-2 mt-[-9px] text-gray-400 bg-white px-2 text-[12px]">
-        {title}
-      </div>
+    <Label title={title}>
       <input
+        autoComplete="off"
         placeholder="R$ 0,00"
-        className="rounded-md h-[40px] pl-4 w-[298px]"
+        className="rounded-md h-[40px] pl-2 w-full"
         onChange={(e) => {
           const formatted = formatCurrency(e.target.value);
           setValue(formatted);
         }}
         value={value}
       />
-    </div>
+    </Label>
   );
 };
 
-export const Select = ({ title }) => {
+export const Select = ({ title, selectOptions = [], value, setValue }) => {
+  const handleSetOptions = (e) => {
+    const value = selectOptions.find(option => option.id =  e.target.value)
+    setValue(value)
+  }
   return (
-    <div className="rounded-md border-[1px] bg-gray-100 w-[300px] relative">
-      <div className="absolute top-0 left-2 mt-[-9px] text-gray-400 bg-white px-2 text-[12px]">
-        {title}
-      </div>
-      <select className="rounded-md h-[40px] pl-4 w-[298px]">
-        <option></option>
-        <option>teste</option>
-        <option>teste</option>
-        <option>teste</option>
+    <Label title={title}>
+      <select className="rounded-md h-[40px] pl-2 w-full" onChange={handleSetOptions}>
+        <option title={value.name} value={value.id}>{value.name}</option>
+        {selectOptions.map(option => value.id !== option.id ? <option title={option.name} key={option.id} value={option.id}>{option.name}</option> : null)}
       </select>
-    </div>
+    </Label>
   );
 };
 
 export const Textarea = ({ title }) => {
   return (
-    <div className="rounded-md border-[1px] bg-gray-100 w-[300px] h-[150px] relative">
-      <div className="absolute top-0 left-2 mt-[-9px] text-gray-400 bg-white px-2 text-[12px]">
+    <div className="rounded-md border-[1px] bg-gray-100 w-full h-[150px] relative">
+      <div className="absolute top-0 left-2 mt-[-7px] text-gray-400 bg-white px-2 text-[12px] border-[1px] rounded-md leading-none">
         {title}
       </div>
-      <textarea className="rounded-md w-[298px] h-[148px] p-4"></textarea>
+      <textarea className="rounded-md w-full h-[148px] p-2"></textarea>
     </div>
   );
 };

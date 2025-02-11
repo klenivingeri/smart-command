@@ -7,7 +7,7 @@ export default function ProdutoCadastrar() {
     <div className="h-full">
       <Cadastrar
         path="cadastrar-produto"
-        title="Cadastrar novo Produto"
+        title="Cadastro de Produto"
       />
     </div>
   );

@@ -72,7 +72,7 @@ export const SideBar = ({ path }) => {
       setPathName(name);
     }
   };
-  console.log({closeMenu})
+
   return !closeMenu ? (
     <nav className="w-[250px] min-w-[250px] shadow-md">
       <div

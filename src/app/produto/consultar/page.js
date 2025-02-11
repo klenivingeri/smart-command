@@ -1,9 +1,9 @@
-import { Cadastrar } from "@/components/Pages/Produto/Cadastrar";
+import { Consultar } from "@/components/Pages/Produto/Consultar";
 
 export default function ProdutoConsultar() {
     return (
       <div className="h-full">
-        <Cadastrar path="consultar-produtos" />
+        <Consultar path="consultar-produtos" />
       </div>
     );
 }
