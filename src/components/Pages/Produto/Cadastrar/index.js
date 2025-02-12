@@ -26,8 +26,10 @@ const selectOptions2 = [
 ];
 
 const alertTest = () => {
-  alert('Aqui você vai pode criar uma nova categoria de item se ele ainda não exister ')
-}
+  alert(
+    "Aqui você vai pode criar uma nova categoria de item se ele ainda não exister "
+  );
+};
 
 export const Cadastrar = ({ path, title }) => {
   const [name, setName] = useState("");
@@ -52,16 +54,23 @@ export const Cadastrar = ({ path, title }) => {
       <span className="flex border-[1px] my-4 border-b-gray-100" />
       <div className="flex flex-col gap-4 w-[50%]">
         <Input title="Nome do Produto" setValue={setName} value={name} />
-        <InputNumeral title="Preço" setValue={setPrice} value={price} />
-        <Input title="Código" />
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-4">
+          <InputNumeral title="Preço" setValue={setPrice} value={price} />
+          <Input title="Código" />
+        </div>
+
+        <div className="flex items-center gap-4">
           <Select
             title="Selecione o tipo"
             selectOptions={selectOptions}
             value={type}
             setValue={setType}
           />
-          <ButtonBox style="bg-purple-500 hover:bg-purple-400 text-white text-1lx" handleAction={alertTest}>+</ButtonBox>
+          <a onClick={alertTest}>
+            <ButtonBox style="bg-purple-500 hover:bg-purple-400 text-white text-1lx">
+              +
+            </ButtonBox>
+          </a>
         </div>
         <Select
           title="Promoção"
@@ -70,6 +79,11 @@ export const Cadastrar = ({ path, title }) => {
           setValue={setPromotion}
         />
         <Textarea title="Descrição" />
+        <a onClick={alertTest}>
+          <ButtonBox style="bg-purple-500 hover:bg-purple-400 text-white text-1lx">
+            Cadastrar Produto
+          </ButtonBox>
+        </a>
       </div>
     </TemplateWithMenu>
   );
