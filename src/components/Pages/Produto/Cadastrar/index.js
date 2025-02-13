@@ -19,6 +19,7 @@ const selectOptions = [
   { id: 4, name: "Refri" },
   { id: 5, name: "Vitámina" },
 ];
+
 const selectOptions2 = [
   { id: 1, name: "Suco + Assado" },
   { id: 2, name: "3(três) assados por R$ 15,00" },
@@ -42,7 +43,7 @@ export const Cadastrar = ({ path, title }) => {
     id: 10,
     name: "Nenhuma promoção selecionada",
   });
-  console.log(name);
+
   return (
     <TemplateWithMenu path={path}>
       <div className="border-gray-100 rounded-md shadow-md h-36 border-2 pl-6 flex ">
@@ -50,7 +51,6 @@ export const Cadastrar = ({ path, title }) => {
           <IconCube size="w-14 h-14" />
         </TitleWithIcon>
       </div>
-
       <span className="flex border-[1px] my-4 border-b-gray-100" />
       <div className="flex flex-col gap-4 w-[50%]">
         <Input title="Nome do Produto" setValue={setName} value={name} />

@@ -1,7 +1,7 @@
 import { getProducts } from "./productsController";
 
-export async function GET(req) {
-  const response = await getProducts()
+export async function GET(request) {
+  const response = await getProducts(request)
   return response
 }
 

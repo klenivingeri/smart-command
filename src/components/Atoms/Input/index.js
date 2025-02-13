@@ -1,5 +1,4 @@
 import { formatCurrency } from "@/utils/currency";
-import { useState } from "react";
 
 export const Label = ({ title, children }) => {
   return (
@@ -12,7 +11,7 @@ export const Label = ({ title, children }) => {
   );
 };
 
-export const Input = ({ title ,value , setValue }) => {
+export const Input = ({ title ,value , setValue, placeholder="" }) => {
   const handleInput = (e) => {
     const value = e.target.value
     setValue(value)
@@ -20,7 +19,13 @@ export const Input = ({ title ,value , setValue }) => {
   }
   return (
     <Label title={title}>
-      <input onChange={handleInput} className="rounded-md h-[40px] pl-2 w-full" autoComplete="off" value={value} />
+      <input 
+      onChange={handleInput}
+      className="rounded-md h-[40px] pl-2 w-full"
+      autoComplete="off"
+      value={value}
+      placeholder={placeholder}
+      />
     </Label>
   );
 };

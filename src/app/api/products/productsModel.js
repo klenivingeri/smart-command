@@ -7,7 +7,8 @@ const productSchema = mongoose.Schema({
     description: { type: mongoose.Schema.Types.String },
     price: { type: mongoose.Schema.Types.Number },
     type: { type: mongoose.Schema.Types.Number },
-    promotion: promotionSchema
+    promotion: promotionSchema,
+    title: { type: mongoose.Schema.Types.String }
   }, {versionKey: false}
 )
 
