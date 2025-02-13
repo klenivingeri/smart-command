@@ -11,7 +11,7 @@ export const getProducts = async (request) => {
     if (title?.length) {
       query = { title: { $regex: `.*${title}.*`, $options: "i" } };
     } else if(id?.length){
-      query = { id: id };
+      query = { _id: id };
     }
 
     await connectToDatabase();

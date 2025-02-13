@@ -45,7 +45,7 @@ const Li = ({
   handleSetPathName,
 }) => {
   return (
-    <Link
+    <a
       href={link}
       onClick={() => {
         handleSetPathName(name, link);
@@ -55,7 +55,7 @@ const Li = ({
       } hover:bg-purple-200 hover:text-purple-800`}
     >
       {children}
-    </Link>
+    </a>
   );
 };
 

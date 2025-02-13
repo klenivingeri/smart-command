@@ -6,11 +6,10 @@ import {
   Select,
   Textarea,
 } from "@/components/Atoms/Input";
-import { TemplateWithMenu } from "@/components/Templates/TemplateWithMenu";
-import { useState } from "react";
-import { IconCube } from "@/icons/Cube";
-import { TitleWithIcon } from "@/components/Molecules/TitleWithIcon";
+
+import { useEffect, useState } from "react";
 import { ButtonBox } from "@/components/Atoms/Button";
+import { formatCurrency } from "@/utils/currency";
 
 const selectOptions = [
   { id: 1, name: "Frito" },
@@ -32,31 +31,48 @@ const alertTest = () => {
   );
 };
 
-export const Cadastrar = ({ path, title }) => {
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
-  const [type, setType] = useState({
-    id: 10,
-    name: "Nenhum tipo selecionado",
-  });
-  const [promotion, setPromotion] = useState({
-    id: 10,
-    name: "Nenhuma promoção selecionada",
-  });
+export const Cadastrar = ({ product = [] }) => {
+  console.log(product)
+  const [name, setName] = useState(product[0]?.name || "");
+  const [price, setPrice] = useState(formatCurrency(product[0]?.price) || "");
+  const [description, setDescription] = useState(product[0]?.description || "");
+  const [code, setCode] = useState(product[0]?.code || "");
+  const [type, setType] = useState(
+    product[0]?.type
+      ? { id: product[0]?.type, name: product[0]?.type }
+      : {
+          _id: "Nenhum tipo selecionado",
+          name: "Nenhum tipo selecionado",
+        }
+  );
+  const [promotion, setPromotion] = useState(
+    product[0]?.promotion._id
+      ? { id: product[0]?.promotion._id, name: product[0]?.promotion.name }
+      : {
+          id: 10,
+          name: "Nenhuma promoção selecionada",
+        }
+  );
+
+  useEffect(() => {
+    if (product && product.length > 0) {
+      setName(product[0]?.name || "");
+      setPrice(product[0]?.price || "");
+      setType({id:product[0]?.type, name:product[0]?.type} || "");
+      setPromotion({id:product[0]?.promotion._id, name:product[0]?.promotion.name} || "");
+      setDescription(product[0]?.description || "")
+      setCode(product[0]?.code || "")
+    }
+  }, [product]);
 
   return (
-    <TemplateWithMenu path={path}>
-      <div className="border-gray-100 rounded-md shadow-md h-36 border-2 pl-6 flex ">
-        <TitleWithIcon size="text-3xl" title={title}>
-          <IconCube size="w-14 h-14" />
-        </TitleWithIcon>
-      </div>
+    <div>
       <span className="flex border-[1px] my-4 border-b-gray-100" />
       <div className="flex flex-col gap-4 w-[50%]">
         <Input title="Nome do Produto" setValue={setName} value={name} />
         <div className="flex items-center gap-4">
           <InputNumeral title="Preço" setValue={setPrice} value={price} />
-          <Input title="Código" />
+          <Input title="Código" setValue={setCode} value={code} />
         </div>
 
         <div className="flex items-center gap-4">
@@ -78,13 +94,17 @@ export const Cadastrar = ({ path, title }) => {
           value={promotion}
           setValue={setPromotion}
         />
-        <Textarea title="Descrição" />
+        <Textarea
+          title="Descrição"
+          value={description}
+          setValue={setDescription}
+        />
         <a onClick={alertTest}>
           <ButtonBox style="bg-purple-500 hover:bg-purple-400 text-white text-1lx">
             Cadastrar Produto
           </ButtonBox>
         </a>
       </div>
-    </TemplateWithMenu>
+    </div>
   );
 };

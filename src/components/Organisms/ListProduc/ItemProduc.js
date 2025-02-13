@@ -4,6 +4,7 @@ import { Input, InputToggle, ToggleSwitch } from "@/components/Atoms/Input";
 import { IconEdit } from "@/icons/Edit";
 import { formatCurrency } from "@/utils/currency";
 import Image from "next/image";
+import Link from "next/link";
 
 export const ItemProduct = ({ record }) => {
   const [isActive, setIsActive] = useState(record.active);
@@ -39,11 +40,11 @@ export const ItemProduct = ({ record }) => {
           <b>{formatCurrency(record.price)}</b>
         </div>
         <div className="flex gap-4 col-span-2 items-center">
-          <a>
+        <Link href={`/produto/cadastrar?id=${record._id}`}>
             <ButtonBox style="bg-blue-500 hover:bg-blue-400 text-white">
               <IconEdit size="w-6 h-6" />
             </ButtonBox>
-          </a>
+          </Link>
           <a>
             <ButtonBox style="bg-teal-500 hover:bg-teal-400 text-white">
               Ver detalhes

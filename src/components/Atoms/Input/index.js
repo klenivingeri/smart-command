@@ -12,11 +12,10 @@ export const Label = ({ title, children }) => {
   );
 };
 
-export const Input = ({ title ,value , setValue, placeholder="" }) => {
+export const Input = ({ title ,value , setValue, placeholder="", handleKeyDown = () => {} }) => {
   const handleInput = (e) => {
     const value = e.target.value
     setValue(value)
-
   }
   return (
     <Label title={title}>
@@ -25,6 +24,7 @@ export const Input = ({ title ,value , setValue, placeholder="" }) => {
       className="rounded-md h-[40px] pl-2 w-full"
       autoComplete="off"
       value={value}
+      onKeyDown={handleKeyDown}
       placeholder={placeholder}
       />
     </Label>
@@ -63,13 +63,18 @@ export const Select = ({ title, selectOptions = [], value, setValue }) => {
   );
 };
 
-export const Textarea = ({ title }) => {
+export const Textarea = ({ title, value, setValue }) => {
+  const handleInput = (e) => {
+    const value = e.target.value
+    setValue(value)
+  }
+  console.log(value)
   return (
     <div className="rounded-md border-[1px] bg-gray-100 w-full h-[150px] relative">
       <div className="absolute top-0 left-2 mt-[-7px] text-gray-400 bg-white px-2 text-[12px] border-[1px] rounded-md leading-none">
         {title}
       </div>
-      <textarea className="rounded-md w-full h-[148px] p-2"></textarea>
+      <textarea onChange={handleInput} className="rounded-md w-full h-[148px] p-2" defaultValue={value}></textarea>
     </div>
   );
 };
