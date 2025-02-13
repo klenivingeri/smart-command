@@ -1,4 +1,5 @@
 import { formatCurrency } from "@/utils/currency";
+import { useState } from "react";
 
 export const Label = ({ title, children }) => {
   return (
@@ -70,5 +71,26 @@ export const Textarea = ({ title }) => {
       </div>
       <textarea className="rounded-md w-full h-[148px] p-2"></textarea>
     </div>
+  );
+};
+
+export const InputToggle = ({ title, setIsActive, isActive }) => {
+  const handleToggle = () => {
+    setIsActive(!isActive);
+  };
+
+  return (
+    <label>
+      <button
+        onClick={handleToggle}
+        className={`w-12 h-6 flex items-center rounded-full transition-all 
+          ${isActive ? 'bg-blue-500' : 'bg-gray-300'}`}
+      >
+        <div
+          className={`w-5 h-5 bg-white rounded-full shadow-md transform transition-all 
+            ${isActive ? 'translate-x-6 ml-[1px]' : 'translate-x-0 ml-[4px]'}`}
+        ></div>
+      </button>
+    </label>
   );
 };

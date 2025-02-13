@@ -1,29 +1,27 @@
 "use client";
 
 import { ButtonBox } from "@/components/Atoms/Button";
-import { Input, Select } from "@/components/Atoms/Input";
+import { Input } from "@/components/Atoms/Input";
 import { TitleWithIcon } from "@/components/Molecules/TitleWithIcon";
 import { TemplateWithMenu } from "@/components/Templates/TemplateWithMenu";
 import { IconSearchCircle, IconSearchGlass } from "@/icons/Search";
 import { useState } from "react";
 import { getApiProducts } from "@/getApi/products";
-const selectOptions = [
-  { id: "code", name: "Código" },
-  { id: "name", name: "Nome" },
-];
+import { ListProduct } from "@/components/Organisms/ListProduc";
 
 export const Consultar = ({ path, title }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [inputSearch, setInputSearch] = useState("");
-  const [records, setRecords] =useState({})
+  const [data, setData] =useState({})
+
   const handlebuttonSearch = async () => {
     setIsLoading(true);
+    const response = await getApiProducts(`title=${inputSearch}`);
 
-    const data = await getApiProducts(`title=${inputSearch}`);
-    setRecords(data.records)
+    setData({...response})
     setIsLoading(false);
   };
-  console.log(records)
+
   return (
     <TemplateWithMenu path={path}>
       <div className="border-gray-100 rounded-md shadow-md h-36 border-2 pl-6 flex ">
@@ -31,7 +29,7 @@ export const Consultar = ({ path, title }) => {
           <IconSearchCircle size="w-14 h-14" />
         </TitleWithIcon>
       </div>
-      <span className="flex border-[1px] my-4 border-b-gray-100" />
+      <span className="flex border-[1px] mt-4 mb-6 border-b-gray-100" />
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-11">
           <Input
@@ -49,7 +47,9 @@ export const Consultar = ({ path, title }) => {
           </a>
         </div>
       </div>
-      {!isLoading ? <div>lista</div> : <div>carregando</div>}
+      {!isLoading ?
+        <ListProduct data={data} />
+        : <div>carregando</div>}
     </TemplateWithMenu>
   );
 };

@@ -6,7 +6,7 @@ export async function GET(request) {
 }
 
 export async function POST(request) {
-  return new Response(JSON.stringify({ message: "Hello, batata!" }), {
+  return new Response(JSON.stringify({ message: "Hello, batata!", error: true }), {
     headers: { "Content-Type": "application/json" },
   });
 }

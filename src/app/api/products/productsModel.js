@@ -6,9 +6,10 @@ const productSchema = mongoose.Schema({
     name: { type: mongoose.Schema.Types.String, required:true },
     description: { type: mongoose.Schema.Types.String },
     price: { type: mongoose.Schema.Types.Number },
-    type: { type: mongoose.Schema.Types.Number },
+    type: { type: mongoose.Schema.Types.String },
     promotion: promotionSchema,
-    title: { type: mongoose.Schema.Types.String }
+    title: { type: mongoose.Schema.Types.String },
+    active: { type: mongoose.Schema.Types.Boolean }
   }, {versionKey: false}
 )
 
