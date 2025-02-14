@@ -7,7 +7,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const ItemProduct = ({ record }) => {
-  const [isActive, setIsActive] = useState(record.active);
 
   return (
       <div className="grid grid-cols-12 ml-4">
@@ -17,7 +16,7 @@ export const ItemProduct = ({ record }) => {
             width={75}
             className="rounded-md"
             alt="Imagem de moldura de foto vazia"
-            src="https://img.freepik.com/vetores-premium/icone-de-moldura-de-foto-foto-vazia-em-branco-vetor-em-fundo-transparente-isolado-eps-10_399089-1290.jpg"
+            src="/image/empty-image.webp"
           />
           <div>
             <div>

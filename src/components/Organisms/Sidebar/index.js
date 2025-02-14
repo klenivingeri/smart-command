@@ -44,7 +44,7 @@ const Li = ({
   path,
   handleSetPathName,
 }) => {
-  return (
+  return link.length ? (
     <a
       href={link}
       onClick={() => {
@@ -56,10 +56,21 @@ const Li = ({
     >
       {children}
     </a>
-  );
+  ) : (
+    <Link
+      href={link}
+      onClick={() => {
+        handleSetPathName(name, link);
+      }}
+      className={`flex w-full gap-4 ${pl} p-3 items-center text-1xl rounded-md ${
+        path == name ? "bg-purple-200 font-medium text-purple-800" : ""
+      } hover:bg-purple-200 hover:text-purple-800`}
+    >
+      {children}
+    </Link>
+  )
+  ;
 };
-
-
 
 export const SideBar = ({ path }) => {
   const [pathName, setPathName] = useState(path || "");

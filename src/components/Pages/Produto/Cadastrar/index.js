@@ -20,7 +20,7 @@ const selectOptions = [
 ];
 
 const selectOptions2 = [
-  { id: 1, name: "Suco + Assado" },
+  { id: 1, name: "Suco + Assado + Frito" },
   { id: 2, name: "3(três) assados por R$ 15,00" },
   { id: 3, name: "3 Fritos por R$:13,00" },
 ];
@@ -31,15 +31,14 @@ const alertTest = () => {
   );
 };
 
-export const Cadastrar = ({ product = [] }) => {
-  console.log(product)
+export const Cadastrar = ({ product = [], selectPromotions, selectTypes }) => {
   const [name, setName] = useState(product[0]?.name || "");
   const [price, setPrice] = useState(formatCurrency(product[0]?.price) || "");
   const [description, setDescription] = useState(product[0]?.description || "");
   const [code, setCode] = useState(product[0]?.code || "");
   const [type, setType] = useState(
     product[0]?.type
-      ? { id: product[0]?.type, name: product[0]?.type }
+      ? { _id: product[0]?.type, name: product[0]?.type }
       : {
           _id: "Nenhum tipo selecionado",
           name: "Nenhum tipo selecionado",
@@ -47,9 +46,9 @@ export const Cadastrar = ({ product = [] }) => {
   );
   const [promotion, setPromotion] = useState(
     product[0]?.promotion._id
-      ? { id: product[0]?.promotion._id, name: product[0]?.promotion.name }
+      ? { _id: product[0]?.promotion._id, name: product[0]?.promotion.name }
       : {
-          id: 10,
+          _id: 10,
           name: "Nenhuma promoção selecionada",
         }
   );
@@ -78,7 +77,7 @@ export const Cadastrar = ({ product = [] }) => {
         <div className="flex items-center gap-4">
           <Select
             title="Selecione o tipo"
-            selectOptions={selectOptions}
+            selectOptions={selectTypes}
             value={type}
             setValue={setType}
           />
@@ -90,7 +89,7 @@ export const Cadastrar = ({ product = [] }) => {
         </div>
         <Select
           title="Promoção"
-          selectOptions={selectOptions2}
+          selectOptions={selectPromotions}
           value={promotion}
           setValue={setPromotion}
         />

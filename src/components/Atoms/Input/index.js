@@ -50,14 +50,14 @@ export const InputNumeral = ({ title, value, setValue }) => {
 
 export const Select = ({ title, selectOptions = [], value, setValue }) => {
   const handleSetOptions = (e) => {
-    const value = selectOptions.find(option => option.id =  e.target.value)
+    const value = selectOptions.find(option => option._id =  e.target.value)
     setValue(value)
   }
   return (
     <Label title={title}>
       <select className="rounded-md h-[40px] pl-2 w-full" onChange={handleSetOptions}>
-        <option title={value.name} value={value.id}>{value.name}</option>
-        {selectOptions.map(option => value.id !== option.id ? <option title={option.name} key={option.id} value={option.id}>{option.name}</option> : null)}
+        <option title={value.name} value={value._id}>{value.name}</option>
+        {selectOptions.map(option => value._id !== option._id ? <option title={option.name} key={option._id} value={option._id}>{option.name}</option> : null)}
       </select>
     </Label>
   );
@@ -68,7 +68,7 @@ export const Textarea = ({ title, value, setValue }) => {
     const value = e.target.value
     setValue(value)
   }
-  console.log(value)
+
   return (
     <div className="rounded-md border-[1px] bg-gray-100 w-full h-[150px] relative">
       <div className="absolute top-0 left-2 mt-[-7px] text-gray-400 bg-white px-2 text-[12px] border-[1px] rounded-md leading-none">
