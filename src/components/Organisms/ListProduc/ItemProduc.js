@@ -7,7 +7,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const ItemProduct = ({ record }) => {
-
   return (
       <div className="grid grid-cols-12 ml-4">
         <div className="flex col-span-5 gap-4 items-center">
@@ -23,7 +22,7 @@ export const ItemProduct = ({ record }) => {
               <b>{record.name}</b>
             </div>
             <div>
-              <span className="text-gray-400">Tipo:</span> {record.type}
+              <span className="text-gray-400">Tipo:</span> {record.type.name}
             </div>
             <div>
               <span className="text-gray-400">Código:</span> {record.code}

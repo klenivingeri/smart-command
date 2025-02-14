@@ -1,4 +1,4 @@
-import { getProducts } from "./productsController";
+import { getProducts, postProduct, putProduct } from "./productsController";
 
 export async function GET(request) {
   const response = await getProducts(request)
@@ -6,9 +6,8 @@ export async function GET(request) {
 }
 
 export async function POST(request) {
-  return new Response(JSON.stringify({ message: "Hello, batata!", error: true }), {
-    headers: { "Content-Type": "application/json" },
-  });
+  const response = await postProduct(request)
+  return response
 }
 
 export async function DELETE(request) {
@@ -18,7 +17,6 @@ export async function DELETE(request) {
 }
 
 export async function PUT(request) {
-  return new Response(JSON.stringify({ message: "Hello, batata!" }), {
-    headers: { "Content-Type": "application/json" },
-  });
+  const response = await putProduct(request)
+  return response
 }

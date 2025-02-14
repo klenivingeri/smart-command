@@ -7,14 +7,14 @@ export const getPromotions = async (request) => {
   const id = searchParams.get("id");
 
   try {
+    await connectToDatabase();
     let query = {};
     if (name?.length) {
       query = { name: { $regex: `.*${name}.*`, $options: "i" } };
     } else if(id?.length){
       query = { _id: id };
     }
-
-    await connectToDatabase();
+    
     const listPromotion = await promotion.find(query);
 
     return new Response(JSON.stringify({ records: listPromotion }), {

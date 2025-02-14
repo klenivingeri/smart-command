@@ -9,21 +9,8 @@ import {
 
 import { useEffect, useState } from "react";
 import { ButtonBox } from "@/components/Atoms/Button";
-import { formatCurrency } from "@/utils/currency";
-
-const selectOptions = [
-  { id: 1, name: "Frito" },
-  { id: 2, name: "Assado" },
-  { id: 3, name: "Suco" },
-  { id: 4, name: "Refri" },
-  { id: 5, name: "Vitámina" },
-];
-
-const selectOptions2 = [
-  { id: 1, name: "Suco + Assado + Frito" },
-  { id: 2, name: "3(três) assados por R$ 15,00" },
-  { id: 3, name: "3 Fritos por R$:13,00" },
-];
+import { formatCurrency, parseCurrency } from "@/utils/currency";
+import { postAndPutApiProduct } from "@/getApi/products";
 
 const alertTest = () => {
   alert(
@@ -32,37 +19,37 @@ const alertTest = () => {
 };
 
 export const Cadastrar = ({ product = [], selectPromotions, selectTypes }) => {
+  console.log(product)
   const [name, setName] = useState(product[0]?.name || "");
   const [price, setPrice] = useState(formatCurrency(product[0]?.price) || "");
   const [description, setDescription] = useState(product[0]?.description || "");
   const [code, setCode] = useState(product[0]?.code || "");
-  const [type, setType] = useState(
-    product[0]?.type
-      ? { _id: product[0]?.type, name: product[0]?.type }
-      : {
-          _id: "Nenhum tipo selecionado",
-          name: "Nenhum tipo selecionado",
-        }
-  );
-  const [promotion, setPromotion] = useState(
-    product[0]?.promotion._id
-      ? { _id: product[0]?.promotion._id, name: product[0]?.promotion.name }
-      : {
-          _id: 10,
-          name: "Nenhuma promoção selecionada",
-        }
-  );
+  const [type, setType] = useState(product[0]?.type || {});
+  const [promotion, setPromotion] = useState(product[0]?.promotion || {});
+
+  const handleSaveProduct = () => {
+    postAndPutApiProduct(product[0]?._id, {
+      name,
+      code,
+      type,
+      price: parseCurrency(price),
+      description,
+      promotion,
+      title: `${code} - ${name}`,
+      active: true,
+    });
+  };
 
   useEffect(() => {
     if (product && product.length > 0) {
-      setName(product[0]?.name || "");
-      setPrice(product[0]?.price || "");
-      setType({id:product[0]?.type, name:product[0]?.type} || "");
-      setPromotion({id:product[0]?.promotion._id, name:product[0]?.promotion.name} || "");
-      setDescription(product[0]?.description || "")
-      setCode(product[0]?.code || "")
+      setName(product[0]?.name);
+      setPrice(formatCurrency(product[0]?.price));
+      setType(product[0]?.type);
+      setPromotion(product[0]?.promotion);
+      setDescription(product[0]?.description);
+      setCode(product[0]?.code);
     }
-  }, [product]);
+  }, [product[0]]);
 
   return (
     <div>
@@ -98,7 +85,7 @@ export const Cadastrar = ({ product = [], selectPromotions, selectTypes }) => {
           value={description}
           setValue={setDescription}
         />
-        <a onClick={alertTest}>
+        <a onClick={handleSaveProduct}>
           <ButtonBox style="bg-purple-500 hover:bg-purple-400 text-white text-1lx">
             Cadastrar Produto
           </ButtonBox>

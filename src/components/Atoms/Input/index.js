@@ -50,14 +50,15 @@ export const InputNumeral = ({ title, value, setValue }) => {
 
 export const Select = ({ title, selectOptions = [], value, setValue }) => {
   const handleSetOptions = (e) => {
-    const value = selectOptions.find(option => option._id =  e.target.value)
-    setValue(value)
+    const _value = selectOptions.find(option => option._id ===  e.target.value)
+    setValue(_value)
   }
+  
   return (
     <Label title={title}>
-      <select className="rounded-md h-[40px] pl-2 w-full" onChange={handleSetOptions}>
-        <option title={value.name} value={value._id}>{value.name}</option>
-        {selectOptions.map(option => value._id !== option._id ? <option title={option.name} key={option._id} value={option._id}>{option.name}</option> : null)}
+      <select className="rounded-md h-[40px] pl-2 w-full" value={value?._id} onChange={handleSetOptions}>
+        <option title={value?.name} value=''></option>
+        {selectOptions.map((option,i) => <option title={option?.name} key={i} value={option?._id}>{option?.name}</option> )}
       </select>
     </Label>
   );

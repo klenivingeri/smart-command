@@ -10,3 +10,12 @@ export const formatCurrency = (value) => {
 
   return numeral(num).format("$ 0,0.00");
 };
+
+export const parseCurrency = (value) => {
+  if (!value) return 0;
+
+  // Remove tudo que não for número ou ponto decimal
+  const num = Number(value.replace(/[^0-9,.-]/g, "").replace(",", "."));
+
+  return Math.round(num * 100); // Converte para centavos
+};

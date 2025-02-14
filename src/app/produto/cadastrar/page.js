@@ -30,10 +30,10 @@ export default function ProdutoCadastrar() {
 
       if (ProductID?.length) {
         getApi.push(getApiProducts(`id=${ProductID}`))
-        return;
       }
 
       const [dataPromotions, dataTypes, dataProduct] = await Promise.all(getApi)
+      console.log(dataProduct)
       setProduct(dataProduct);
       setDataTypes(dataTypes)
       setDataPromotions(dataPromotions)
