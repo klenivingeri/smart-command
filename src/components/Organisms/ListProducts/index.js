@@ -11,7 +11,7 @@ export const ListProduct = ({ data }) => {
         <div id="price" className="flex  col-span-1 items-center">
         <b>Preço</b>
         </div>
-        <div className="flex gap-4 col-span-2 items-center">Ação</div>
+        <div className="flex gap-4 col-span-2 items-center"></div>
       </div>
       {data.records?.map((record) => (
         <ItemProduct record={record} key={record._id} />

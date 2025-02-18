@@ -228,7 +228,7 @@ export const SideBar = ({ path }) => {
                 Promoções
               </div>
               <div className="mt-[4px] mr-2">
-                {menu.product.includes(pathName) ? (
+                {menu.promotion.includes(pathName) ? (
                   <IconChevronDown size="w-4 h-4" />
                 ) : (
                   <IconChevronRight size="w-4 h-4" />

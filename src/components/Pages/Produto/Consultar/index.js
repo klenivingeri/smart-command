@@ -5,7 +5,7 @@ import { Input } from "@/components/Atoms/Input";
 import { IconSearchGlass } from "@/icons/Search";
 import { useState } from "react";
 import { getApiProducts } from "@/getApi/products";
-import { ListProduct } from "@/components/Organisms/ListProduc";
+import { ListProduct } from "@/components/Organisms/ListProducts";
 import { LoadingSpinner } from "@/components/Atoms/LoadingSpinner";
 
 export const Consultar = ({ path, title }) => {

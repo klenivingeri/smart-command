@@ -37,7 +37,7 @@ export const ItemProduct = ({ record }) => {
         <div id="price" className="flex col-span-1 items-center">
           <b>{formatCurrency(record.price)}</b>
         </div>
-        <div className="flex gap-4 col-span-2 items-center">
+        <div className="flex gap-4 col-span-2 items-center justify-end pr-4">
         <Link href={`/produto/cadastrar?id=${record._id}`}>
             <ButtonBox style="bg-blue-500 hover:bg-blue-400 text-white">
               <IconEdit size="w-6 h-6" />

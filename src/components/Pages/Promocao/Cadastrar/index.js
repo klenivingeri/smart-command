@@ -15,6 +15,7 @@ import { postAndPutApiProduct } from "@/getApi/products";
 export const Cadastrar = ({ promotion = [], }) => {
   console.log(promotion)
   const [name, setName] = useState(promotion[0]?.name || "");
+  const [number, setNumber] = useState(promotion[0]?.name || 0);
   const [price, setPrice] = useState(formatCurrency(promotion[0]?.price) || "");
   const [single, setSingle] = useState(promotion[0]?.type || {});
   const [comparison, setComparison] = useState(promotion[0]?.promotion || {});
@@ -22,23 +23,20 @@ export const Cadastrar = ({ promotion = [], }) => {
   const handleSaveProduct = () => {
     postAndPutApiProduct(promotion[0]?._id, {
       name,
-      code,
-      type,
+      number,
       price: parseCurrency(price),
-      description,
       promotion,
       title: `${code} - ${name}`,
-      active: true,
     });
   };
 
   useEffect(() => {
     if (promotion && promotion.length > 0) {
       setName(promotion[0]?.name);
+      setNumber(promotion[0]?.number);
       setPrice(formatCurrency(promotion[0]?.price));
       setSingle(promotion[0]?.single);
       setComparison(promotion[0]?.comparison);
-
     }
   }, [promotion[0]]);
 
@@ -46,7 +44,8 @@ export const Cadastrar = ({ promotion = [], }) => {
     <div>
       <span className="flex border-[1px] my-4 border-b-gray-100" />
       <div className="flex flex-col gap-4 w-[50%]">
-        <Input title="Nome da Promoção" setValue={setName} value={name} />
+        <Input title="Nome da Promoção" setValue={setNumber} value={number} />
+        <Input title="Quantidade de Produtos pra fechar uma promoção" setValue={setName} value={name} />
         <div className="flex items-center gap-4">
           <InputNumeral title="Valor a ser descontado" setValue={setPrice} value={price} />
         </div>
