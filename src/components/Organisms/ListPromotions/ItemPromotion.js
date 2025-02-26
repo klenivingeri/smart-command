@@ -22,7 +22,7 @@ export const ItemPromotion = ({ record }) => {
               <span className="text-gray-400">Quantidade:</span> {record.quantity}
             </div>
             <div>
-              <span className="text-gray-400">Verificação:</span> {record.single ? 'Unico' : 'Variado'}
+              <span className="text-gray-400">Verificação:</span> {record.variation.name}
             </div>
           </div>
         </div>
@@ -37,7 +37,7 @@ export const ItemPromotion = ({ record }) => {
           </div>
         </div>
         <div className="flex gap-4 col-span-2 items-center justify-end pr-4">
-        <Link href={`/produto/cadastrar?id=${record._id}`}>
+        <Link href={`/promocao/cadastrar?id=${record._id}`}>
             <ButtonBox style="bg-blue-500 hover:bg-blue-400 text-white">
               <IconEdit size="w-6 h-6" />
             </ButtonBox>

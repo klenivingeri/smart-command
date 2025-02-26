@@ -14,7 +14,7 @@ export const getPromotions = async (request) => {
     } else if(id?.length){
       query = { _id: id };
     }
-    
+    console.log(query)
     const listPromotion = await promotion.find(query);
 
     return new Response(JSON.stringify({ records: listPromotion }), {

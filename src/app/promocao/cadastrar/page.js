@@ -1,4 +1,5 @@
 "use client";
+
 import { Cadastrar } from "@/components/Pages/Promocao/Cadastrar";
 import { TemplateWithMenu } from "@/components/Templates/TemplateWithMenu";
 import { useEffect, useState } from "react";
@@ -7,7 +8,7 @@ import { TitleWithIcon } from "@/components/Molecules/TitleWithIcon";
 import { LoadingSpinner } from "@/components/Atoms/LoadingSpinner";
 import { getApiPromotions } from "@/getApi/promotions";
 
-export default function ProdutoCadastrar() {
+export default function PromocaoCadastrar() {
   const [promotionID, setPromotionID] = useState(null);
   const [promotion, setPromotion] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -23,7 +24,8 @@ export default function ProdutoCadastrar() {
   useEffect(() => {
     const get = async () => {
       if (promotionID?.length) {
-      const [dataPromotion] = await getApiPromotions(`id=${promotionID}`)
+      const dataPromotion = await getApiPromotions(`id=${promotionID}`)
+
       setPromotion(dataPromotion);
     }
       setIsLoading(false);
