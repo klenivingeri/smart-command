@@ -9,7 +9,7 @@ import {
 import { useEffect, useState } from "react";
 import { ButtonBox } from "@/components/Atoms/Button";
 import { formatCurrency, parseCurrency } from "@/utils/currency";
-import { postAndPutApiProduct } from "@/getApi/products";
+import { postAndPutApiPromotions } from "@/getApi/promotions";
 
 const selectVariation = [{_id: 'unico', name: 'Único'}, {_id: 'multiple', name: 'Múltiplo' }]
 const selectComparison = [{_id: 'name', name: 'Nome do Produto'}, {_id: 'type', name: 'Tipo do Produto' }]
@@ -21,16 +21,14 @@ export const Cadastrar = ({ promotion = [], }) => {
   const [value, setValue] = useState(formatCurrency(promotion[0]?.price) || "");
   const [variation, setVariation] = useState(promotion[0]?.type || {});
   const [comparison, setComparison] = useState(promotion[0]?.promotion || {});
-
+  console.log('aaaa',{comparison, variation})
   const handleSaveProduct = () => {
-    const filterComparison = selectComparison.filter(c => c._id === selectComparison)
-    const filterVariation = selectVariation.filter(v => v._id === variation)
-    postAndPutApiProduct(promotion[0]?._id, {
+    postAndPutApiPromotions(promotion[0]?._id, {
       name,
       quantity,
       value: parseCurrency(value),
-      comparison: filterComparison,
-      variation: filterVariation
+      comparison: comparison,
+      variation: variation
     });
   };
 
