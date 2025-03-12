@@ -1,4 +1,4 @@
-import { Consultar } from "@/components/Pages/Produto/Consultar";
+import { Consultar } from "@/components/Pages/Comanda/Consultar";
 
 export default function ComandaConsultar() {
     return (
