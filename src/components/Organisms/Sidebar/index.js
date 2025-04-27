@@ -1,7 +1,10 @@
 "use client";
 import { IconChart } from "@/icons/Chart";
 import { IconChevronDown, IconChevronRight } from "@/icons/Chevron";
-import { IconChevronDoubleLeft, IconChevronDoubleRight } from "@/icons/ChevronDouble";
+import {
+  IconChevronDoubleLeft,
+  IconChevronDoubleRight,
+} from "@/icons/ChevronDouble";
 import { IconCommand } from "@/icons/Command";
 import { IconCreate } from "@/icons/Create";
 import { IconHome } from "@/icons/Home";
@@ -35,7 +38,6 @@ const menu = {
   ],
 };
 
-
 const Li = ({
   children,
   link = "",
@@ -68,8 +70,7 @@ const Li = ({
     >
       {children}
     </Link>
-  )
-  ;
+  );
 };
 
 export const SideBar = ({ path }) => {
@@ -144,7 +145,13 @@ export const SideBar = ({ path }) => {
               </div>
             </div>
           </Li>
-          <div className={`${menu.product.includes(pathName) ? "" : "hidden"}`}>
+          <div
+            className={` transition-all duration-300 overflow-hidden ${
+              menu.product.includes(pathName)
+                ? "opacity-100 max-h-96"
+                : "opacity-0 max-h-0"
+            }`}
+          >
             <Li
               name="cadastrar-produto"
               path={pathName}
@@ -195,7 +202,13 @@ export const SideBar = ({ path }) => {
               </div>
             </div>
           </Li>
-          <div className={`${menu.command.includes(pathName) ? "" : "hidden"}`}>
+          <div
+            className={` transition-all duration-300 overflow-hidden ${
+              menu.command.includes(pathName)
+                ? "opacity-100 max-h-96"
+                : "opacity-0 max-h-0"
+            }`}
+          >
             <Li
               name="consultar-comandas"
               path={pathName}
@@ -237,7 +250,11 @@ export const SideBar = ({ path }) => {
             </div>
           </Li>
           <div
-            className={`${menu.promotion.includes(pathName) ? "" : "hidden"}`}
+            className={` transition-all duration-300 overflow-hidden ${
+              menu.promotion.includes(pathName)
+                ? "opacity-100 max-h-96"
+                : "opacity-0 max-h-0"
+            }`}
           >
             <Li
               name="cadastrar-promocao"
@@ -290,7 +307,11 @@ export const SideBar = ({ path }) => {
             </div>
           </Li>
           <div
-            className={`${menu.employees.includes(pathName) ? "" : "hidden"}`}
+            className={` transition-all duration-300 overflow-hidden ${
+              menu.employees.includes(pathName)
+                ? "opacity-100 max-h-96"
+                : "opacity-0 max-h-0"
+            }`}
           >
             <Li
               name="cadastrar-funcionario"
@@ -333,71 +354,71 @@ export const SideBar = ({ path }) => {
         className="flex mt-4 text-2xl justify-center items-center ml-4 pt-[17px] text-purple-700"
       >
         <div className="flex flex-col justify-center">
-          <div className="flex justify-center ml-[-19px]"><b>SC</b></div>
+          <div className="flex justify-center ml-[-19px]">
+            <b>SC</b>
+          </div>
         </div>
       </div>
       <div id="menu">
         <ul className="list-none p-2 w-full">
-        <div onClick={() => setCloseMenu(!closeMenu)} title="Inicio">
-          <Li
-            name="inicio"
-            path={pathName}
-            handleSetPathName={handleSetPathName}
-            link="/"
-          >
-            <IconHome size="w-6 h-6" />
-          </Li>
-
+          <div onClick={() => setCloseMenu(!closeMenu)} title="Inicio">
+            <Li
+              name="inicio"
+              path={pathName}
+              handleSetPathName={handleSetPathName}
+              link="/"
+            >
+              <IconHome size="w-6 h-6" />
+            </Li>
           </div>
           <div onClick={() => setCloseMenu(!closeMenu)} title="Caixa">
-          <Li
-            name="caixa"
-            path={pathName}
-            handleSetPathName={handleSetPathName}
-            link="/caixa"
-          >
-            <IconMoney size="w-6 h-6" />
-          </Li>
+            <Li
+              name="caixa"
+              path={pathName}
+              handleSetPathName={handleSetPathName}
+              link="/caixa"
+            >
+              <IconMoney size="w-6 h-6" />
+            </Li>
           </div>
           <div onClick={() => setCloseMenu(!closeMenu)} title="Produto">
-          <Li
-            name="produto"
-            path={pathName}
-            handleSetPathName={handleSetPathName}
-            
-          >
-            <IconShoppingCart size="w-6 h-6" />
-          </Li>
+            <Li
+              name="produto"
+              path={pathName}
+              handleSetPathName={handleSetPathName}
+            >
+              <IconShoppingCart size="w-6 h-6" />
+            </Li>
           </div>
           <div onClick={() => setCloseMenu(!closeMenu)} title="Comanda">
-          <Li
-            name="comanda"
-            path={pathName}
-            handleSetPathName={handleSetPathName}
-            onClick={() => setCloseMenu(!closeMenu)}
-          >
-            <IconCommand size="w-6 h-6" />
-          </Li>
+            <Li
+              name="comanda"
+              path={pathName}
+              handleSetPathName={handleSetPathName}
+              onClick={() => setCloseMenu(!closeMenu)}
+            >
+              <IconCommand size="w-6 h-6" />
+            </Li>
           </div>
           <div onClick={() => setCloseMenu(!closeMenu)} title="Promoção">
-          <Li
-            name="promocao"
-            path={pathName}
-            handleSetPathName={handleSetPathName}
-            onClick={() => setCloseMenu(!closeMenu)}
-          >
-            <IconPercent size="w-6 h-6" />
-          </Li>
+            <Li
+              name="promocao"
+              path={pathName}
+              handleSetPathName={handleSetPathName}
+              onClick={() => setCloseMenu(!closeMenu)}
+            >
+              <IconPercent size="w-6 h-6" />
+            </Li>
           </div>
           <div onClick={() => setCloseMenu(!closeMenu)} title="Funcionario">
-          <Li
-            name="funcionario"
-            path={pathName}
-            handleSetPathName={handleSetPathName}
-            onClick={() => setCloseMenu(!closeMenu)}
-          >
-            <IconUsers size="w-6 h-6" />
-          </Li>
+            <Li
+              name="funcionario"
+              path={pathName}
+              handleSetPathName={handleSetPathName}
+              onClick={() => setCloseMenu(!closeMenu)}
+            >
+              <IconUsers size="w-6 h-6" />
+            </Li>
           </div>
         </ul>
       </div>
